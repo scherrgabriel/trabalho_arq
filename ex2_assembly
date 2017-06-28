@@ -1,0 +1,30 @@
+		mov		r12,#5 ;armazena numero base =5 em r12
+		;		mov		r12,#134217728		esse numero quebra a condição dos valores serem menor que r4
+		mov		r1, #0x00000000
+		orr		r1,r1, #0x010000
+		orr		r1,r1, #0x0000
+		orr		r1,r1, #0x00	; 65536  posição inicial da mem 65
+		mov		r6,#200
+		mov		r4, #2147483647
+		tst		r4,r12
+		blt		fim
+		
+loop
+		
+		mov		r3,r5	;argumento de entrada
+		add		r5,r5,#1	;r5 = r5+1;
+		
+		str		r12, [r1,r6] ;aloca r12 na p. inicial 65536  deslocado de 0 posicoes
+		add		r6,r6,#4	; r6 = r6+4;
+		lsl		r12,r12,#1	; calculando os termos da pg
+		
+		mov		r2,r12 ; movendo a ultima posição para o RX(R2)
+		
+		cmp		r4,r2	;caso r4 for maior que r2: ele sai do loop
+		movlt	r5, #10
+		
+		
+		cmp		r5,#10
+		blt		loop
+		
+fim
